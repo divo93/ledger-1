@@ -1,0 +1,31 @@
+<div data-role="collapsible">
+        <h2 style="text-align:center;">ALL</h2>
+        <table id="all" data-role="listview" class="table table-striped table-bordered table-condensed tablesorter" style="text-align:center; border-collapse: separate;">
+            <thead >
+                <th style="text-align:center;">Name</th>
+                <th style="text-align:center;">Price(per item)</th>
+                <th style="text-align:center;">Quantity</th>
+                <th style="text-align:center;">Discount(%)</th>
+                <th style="text-align:center;">Category</th>
+                <th style="text-align:center;">SGST(%)</th>
+                <th style="text-align:center;">CGST(%)</th>
+                <th style="text-align:center;">Threshold</th>
+                <th style="text-align:center;">Edit</th>
+                <th style="text-align:center;">Delete</th>
+            </thead>
+            {% for each_product in searched_product|dictsort:"item_name" %}
+                <tr>
+                    <td>{{ each_product.item_name }}</td>
+                    <td>{{ each_product.item_price }}</td>
+                    <td>{{ each_product.item_quantity }}</td>
+                    <td>{{ each_product.discount_percent }}</td>
+                    <td>{{ each_product.item_category }}</td>
+                    <td>{{ each_product.sgst }}</td>
+                    <td>{{ each_product.cgst }}</td>
+                    <td>{{ each_product.threshold_quantity }}</td>
+                    <td><a class="btn" href="/product/edit/{{ each_product.item_name }}">edit</a></td>
+                    <td><a class="btn" href="/product/delete/{{ each_product.item_name }}">delete</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+</div>

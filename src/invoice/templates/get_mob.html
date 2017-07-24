@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form action="{% url 'get_mob' %}" method="POST">
+  {% csrf_token %}
+  <input name="mob_no" id="mob_no" type="number" maxlength="10">
+  <input type="submit" value="Next">
+</form>
+
+{% endblock %}

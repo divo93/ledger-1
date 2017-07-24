@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<p>{{ customer_name }}</p>
+<p>{{ mob_no }}</p>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit">
+</form>
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+{{ form.media }}
+
+{% for each_product in products %}
+    {{ each_product }}: {{ each_product.item_price }}
+    <br>
+{% endfor %}
+
+{% endblock %}

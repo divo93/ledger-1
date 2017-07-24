@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		{% load static %}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{% static 'base/css/bootstrap.css' %}" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="{% static 'base/jquery/jquery-ui.css' %}">
+    </head>
+
+	<body link="#393905" vlink="#393905">
+
+		<div class="container">
+
+			<div class="navbar navbar-inverse navbar-fixed-top navbar-custom">
+				<div class="container">
+					<a class="navbar-brand text-muted" href="/">Ledger</a>
+					<div class="collapse navbar-collapse">
+						<ul class="nav navbar-nav navbar-right">
+							{% if user.is_authenticated %}
+								<li><a href="/get_mob">Invoice</a></li>
+								{% if user.is_superuser %}
+									<li class="active"><a href="/product/all">Inventory</a></li>
+								{% endif %}
+								<li><a href="/logout">Logout</a></li>
+							{% else %}
+								<li><a href="/login">Login</a></li>
+							{% endif %}
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="jumbotron">
+				{% block content %}
+				{% endblock %}
+			</div>
+		</div>
+	</body>
+</html>

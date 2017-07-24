@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>New Custome</h1>
+<form method="POST" action="{% url 'add_customer' %}" class="post-form">{% csrf_token %}
+    {{ form.as_p }}
+    <input value="Save" type="submit" class="save btn btn-default"/>
+</form>
+
+{% endblock %}
