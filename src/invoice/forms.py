@@ -1,5 +1,5 @@
 from django import forms
-from src.invoice.models import CustomerModel, BillModel
+from invoice.models import CustomerModel, BillModel
 
 
 class CustomerForm(forms.ModelForm):

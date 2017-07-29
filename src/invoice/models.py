@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 
-from src.inventory.models import ProductModel
+from inventory.models import ProductModel
 
 MODE_OF_PAYMENT_CHOICES = (
     ('CSH', 'CASH'),
@@ -22,14 +22,30 @@ class CustomerModel(models.Model):
 
 class TempPurchasedProductModel(models.Model):
     temp_prod_id = models.AutoField(primary_key=True, )
-    product_id = models.ForeignKey(ProductModel)
+    product_id = models.ManyToManyField(ProductModel)
     qty = models.IntegerField()
+    sub_total = models.FloatField(default=0.0);
+
+    def __str__(self):
+        return str(self.product_id)
 
 
 class PurchasedProductModel(models.Model):
     purchased_id = models.AutoField(primary_key=True)
-    temp_product_id = models.ForeignKey(TempPurchasedProductModel)
-    Total_Amount = models.DecimalField()
+    product_id = models.ManyToManyField(ProductModel, through='ProductPurchasedRelation', related_name='products')
+    qty = models.IntegerField()
+    sub_total = models.FloatField(default=0.0);
+
+    def __str__(self):
+        return str(self.purchased_id)
+
+
+class ProductPurchasedRelation(models.Model):
+    product_id = models.ForeignKey(ProductModel, related_name='membership')
+    purchased_id = models.ForeignKey(PurchasedProductModel, related_name='membership')
+
+    def __unicode__(self):
+        return str(self.product_id)
 
 
 class BillModel(models.Model):
@@ -44,3 +60,4 @@ class BillModel(models.Model):
 
     def __str__(self):
         return str(self.bill_no)
+
